@@ -33,6 +33,7 @@ import UIKit
     @objc func didExpandLabel(_ label: ExpandableLabel)
     @objc func willCollapseLabel(_ label: ExpandableLabel)
     @objc func didCollapseLabel(_ label: ExpandableLabel)
+    @objc func didTapOnLabel(_ label: ExpandableLabel)
 }
 
 /**
@@ -206,6 +207,8 @@ extension ExpandableLabel {
                 delegate?.didExpandLabel(self)
             }
         }
+
+        delegate?.didTapOnLabel(self)
     }
 
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
