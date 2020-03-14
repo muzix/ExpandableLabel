@@ -190,6 +190,7 @@ extension ExpandableLabel {
 
         if !collapsed {
             guard let range = self.expandedLinkTextRange else {
+                delegate?.didTapOnLabel(self)
                 return
             }
 
@@ -199,16 +200,18 @@ extension ExpandableLabel {
                 delegate?.didCollapseLabel(self)
                 linkHighlighted = isHighlighted
                 setNeedsDisplay()
+            } else {
+                delegate?.didTapOnLabel(self)
             }
         } else {
             if shouldExpand && setLinkHighlighted(touches, event: event, highlighted: false) {
                 delegate?.willExpandLabel(self)
                 collapsed = false
                 delegate?.didExpandLabel(self)
+            } else {
+                delegate?.didTapOnLabel(self)
             }
         }
-
-        delegate?.didTapOnLabel(self)
     }
 
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
